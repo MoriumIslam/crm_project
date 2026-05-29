@@ -1,0 +1,15 @@
+{
+  "name": "crm-project",
+  "version": "1.0.0",
+  "description": "Full-stack CRM application",
+  "scripts": {
+    "dev": "concurrently \"npm run backend\" \"npm run frontend\"",
+    "backend": "cd backend && cargo run",
+    "frontend": "cd frontend && npm run dev",
+    "build": "cd backend && cargo build --release && cd ../frontend && npm run build",
+    "install:all": "cd frontend && npm install"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
