@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: crm-backend
+    env: rust
+    rootDir: backend
+    buildCommand: cargo build --release
+    startCommand: ./target/release/crm_backend
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+
+  - type: web
+    name: crm-frontend
+    env: static
+    rootDir: frontend
+    buildCommand: npm ci && npm run build
+    staticPublishPath: dist
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          type: web
+          name: crm-backend
+          property: url

@@ -1,4 +1,4 @@
-use axum::Router;
+use axum::{routing::get, Router};
 use dotenvy::dotenv;
 use std::env;
 use tower_http::cors::CorsLayer;
@@ -22,6 +22,7 @@ async fn main() {
     let state = AppState { db };
 
     let app = Router::new()
+        .route("/health", get(|| async { "ok" }))
         .merge(contact_routes())
         .merge(interaction_routes())
         .layer(CorsLayer::permissive())
